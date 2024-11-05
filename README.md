@@ -1,1 +1,1 @@
-# wisevision_bridge_interface
+# wisevision_core
