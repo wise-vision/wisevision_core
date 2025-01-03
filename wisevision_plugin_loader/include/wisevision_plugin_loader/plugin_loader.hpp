@@ -1,14 +1,15 @@
 #include <pluginlib/class_loader.hpp>
 #include <rclcpp/logging.hpp>
+#include <string>
+#include <typeinfo>
 
 namespace wisevision::plugin_loader {
-  // using SharedPtr = std::shared_ptr<T>;
-  // using UniquePtr = pluginlib::UniquePtr<Parser>;
+  std::string getTypeName(const std::type_info& ti);
 
   template <class T>
-  typename pluginlib::UniquePtr<T>
-  loadPlugin(const std::string& package, const std::string& base_class, const std::string& name) {
-    pluginlib::ClassLoader<T> parser_loader(package, base_class);
+  typename pluginlib::UniquePtr<T> loadPlugin(const std::string& base_class_package, const std::string& name) {
+    const auto type_name = getTypeName(typeid(T));
+    pluginlib::ClassLoader<T> parser_loader(base_class_package, type_name);
     typename pluginlib::UniquePtr<T> parser = nullptr;
     try {
       parser = parser_loader.createUniqueInstance(name);

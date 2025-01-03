@@ -10,13 +10,15 @@ find_package(ament_cmake_ros REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
 
-add_library(${PROJECT_NAME} INTERFACE)
-target_compile_features(${PROJECT_NAME} INTERFACE c_std_99 cxx_std_17)  # Require C99 and C++17
-target_include_directories(${PROJECT_NAME} INTERFACE
+add_library(${PROJECT_NAME} SHARED
+  src/plugin_loader.cpp
+)
+target_compile_features(${PROJECT_NAME} PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
-ament_target_dependencies(${PROJECT_NAME} INTERFACE
+ament_target_dependencies(${PROJECT_NAME} PUBLIC
   rclcpp
   pluginlib
 )
@@ -33,11 +35,9 @@ install(
   RUNTIME DESTINATION bin
 )
 
-ament_export_include_directories(
-  include
-)
 ament_export_targets(
   export_${PROJECT_NAME}
+  HAS_LIBRARY_TARGET
 )
 ament_export_dependencies(
   rclcpp
