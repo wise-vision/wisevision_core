@@ -51,6 +51,11 @@ jobs:
       run: |
         vcs import --recursive < wisevision_core.repos
 
+    - name: Install Docker CLI
+    run: |
+      apt-get update
+      apt-get install -y docker.io
+
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
       with:
