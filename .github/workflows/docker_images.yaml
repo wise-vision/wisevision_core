@@ -21,6 +21,9 @@ on:
 jobs:
   build-and-push:
     runs-on: self-hosted
+
+    container:
+      image: ubuntu:22.04
     
     steps:
 
