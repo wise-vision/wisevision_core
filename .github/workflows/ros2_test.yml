@@ -37,3 +37,8 @@ jobs:
         cd wisevision_core_ws
         colcon build
 
+    - name: Clean up workspace
+      if: always()
+      run: |
+        sudo rm -rf wisevision_core_ws
+
