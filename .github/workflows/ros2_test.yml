@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: self-hosted
+    runs-on: wisevision-runner
 
     continue-on-error: true
 
@@ -20,7 +20,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
       with:
-        token: ${{ secrets.PAT_TOKEN }} 
         path: wisevision_core_ws/src/wisevision_core
 
     - name: Install dependencies
