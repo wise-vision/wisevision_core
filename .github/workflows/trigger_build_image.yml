@@ -8,7 +8,7 @@ on:
 jobs:
   send_trigger:
 
-    runs-on: self-hosted
+    runs-on: wisevision-runner
     container: ubuntu:22.04
 
     steps:
